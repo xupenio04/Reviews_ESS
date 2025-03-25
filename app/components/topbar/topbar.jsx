@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 
  function TopBar({SetIsAddButton, SetIsRemoveButton,SetIsWatched,SetIsAbandoned,onSearch}){
 
+    const [userName, setUserName] = useState('Carregando...');
+
     useEffect(() => {
         const IsAddButton = document.getElementById('addButton');
         IsAddButton.addEventListener('click', function(){
@@ -28,6 +30,32 @@ import { useEffect, useState } from 'react';
            SetIsAbandoned(true);
            SetIsWatched(false);
         })
+
+        const fetchUserData = async () => {
+            try {
+                const storedName = localStorage.getItem('Username' );
+                if (storedName) {
+                    setUserName(storedName);
+                    return;
+                }
+
+                const loggedInUserName = 'xupenio';
+                const response = await fetch(`http://localhost:5001/users/find/${loggedInUserName}`);
+                
+                if (!response.ok) throw new Error('Usuário não encontrado');
+                
+                const userData = await response.json();
+                if (!userData.name) throw new Error('Nome não encontrado nos dados');
+                
+                localStorage.setItem('Username', userData.name);
+                setUserName(userData.name);
+            } catch (error) {
+                console.error('Falha ao carregar perfil:', error);
+                setUserName('Visitante');
+            }
+        };
+
+        fetchUserData();
     
     });
 
@@ -62,7 +90,7 @@ import { useEffect, useState } from 'react';
                                 </clipPath>
                                 </defs>
                                 </svg>
-                            <p className="profile">Seu perfil</p>
+                                <p className="profile">{userName}</p>
                         </div>
 
         </div>

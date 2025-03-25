@@ -1,6 +1,6 @@
 // userController possui as funções de criação e alteração dos usuários
 
-const User = require("../models/User");
+const User = require("../models/user");
 
 // Criar um novo usuário
 const createUser = async (req, res) => {

@@ -1,5 +1,5 @@
 const Review = require("../models/review");
-const User = require("../models/User");
+const User = require("../models/user");
 const Movie = require("../models/movie");
 const mongoose = require("mongoose");
 const { loggedInUser } = require("../routes/userRoutes");

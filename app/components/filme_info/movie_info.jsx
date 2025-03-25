@@ -12,7 +12,7 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
 
   // Função para voltar à página anterior
   const handleBack = () => {
-    window.history.back();
+    window.location.href= '/pages/create_review';
   };
 
   // Função para buscar a lista de filmes assistidos

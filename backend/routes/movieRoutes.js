@@ -10,7 +10,7 @@ router.post("/add", createMovie);
 router.get("/", getAllMovies);
 router.delete("/delete", deleteMoviebyName)
 router.put("/update", updateMoviebyName)
-router.get("/get", findMovie)
+router.post("/get", findMovie)
 router.get("/getId/:id", findMovieById)
 
 module.exports = router;
