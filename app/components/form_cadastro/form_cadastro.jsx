@@ -1,6 +1,7 @@
 'use client'; // Diretriz para o Next.js marcar este arquivo como um componente cliente
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import './form_cadastro.css';
 
 export default function FormCadastro() {
@@ -10,6 +11,7 @@ export default function FormCadastro() {
     const [showSvgConfirm, setShowSvgConfirm] = useState(false);
     const [errorMessage, setErrorMessage] = useState('a');
     const [userName, setuserName] = useState(null);
+    const router = useRouter();
 
     const svgCode_name = `
         <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +74,7 @@ export default function FormCadastro() {
             });
 
             const data = await response.json();
-            const mensagem = data.error + '!';
+            const mensagem = data.message + '!';
             
             setErrorMessage(mensagem);
             setShowSvgName(false);
@@ -85,9 +87,22 @@ export default function FormCadastro() {
             document.getElementById('password').style.border = '';
             
             if (response.ok) {
-                setErrorMessage(`Conta criada com sucesso!`);
                 message.style.color = 'green';
-                
+
+                const responseLogin = await fetch('http://localhost:5001/users/login', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                const dataUser = await responseLogin.json();
+
+                localStorage.setItem('userName', JSON.stringify(dataUser));
+                localStorage.setItem('user', JSON.stringify(dataUser.user));
+                localStorage.setItem('userToken', JSON.stringify(dataUser.token));
+                console.log(dataUser)
+                router.push('/pages/initial_page'); // Redireciona para a tela inicial
             } else {
                 if (mensagem === 'Username já cadastrado!') {
                     setShowSvgName(true);
