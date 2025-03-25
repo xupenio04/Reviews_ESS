@@ -119,4 +119,34 @@ const findMovieById = async (req,res) => {
         return res.status(500).json({message: "Erro na busca do filme ",error})
     }
 }
-module.exports = { createMovie, getAllMovies, deleteMoviebyName, updateMoviebyName, findMovie, findMovieById};
+
+const findMovieID = async (req, res) => {
+    try {
+      const movieId = req.params.id;
+  
+      // Verificar se o ID é válido
+      if (!mongoose.Types.ObjectId.isValid(movieId)) {
+        return res.status(400).json({ message: 'ID inválido' });
+      }
+  
+      // Converter o userId para ObjectId
+      const objectId = new mongoose.Types.ObjectId(movieId);
+  
+      // Busca o usuário no banco de dados
+      const movie = await Movie.findById(objectId);
+  
+      if (!movie) {
+        return res.status(404).json({ message: 'Filme não encontrado' });
+      }
+  
+      res.json(movie);
+    } catch (error) {
+      // Aqui vamos exibir o erro completo no log do servidor
+      console.error("Erro ao buscar filme:", error);
+  
+      // Retorna uma resposta genérica com um status 500
+      res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
+    }
+};
+
+module.exports = { createMovie, getAllMovies, deleteMoviebyName, updateMoviebyName, findMovie, findMovieById, findMovieID};
