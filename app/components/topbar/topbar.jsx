@@ -23,9 +23,9 @@ import { useEffect, useState } from 'react';
             }
     
             const userName = data.user.name;
-            setUserName(userName); // Atualiza o estado do nome do usuário
+            setUserName(userName); 
     
-            // Passa diretamente para as funções de fetch
+           
         } catch (error) {
             console.error("Erro ao recuperar dados do usuário:", error.message);
         }
