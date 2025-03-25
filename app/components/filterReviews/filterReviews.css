@@ -1,0 +1,21 @@
+#container {
+    position: relative;
+    width: 100vw;       
+    height: 100vh;      
+    background-color: #387478;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#filtro {
+    position: absolute; 
+    top: 11vh;          
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,18 @@
+#grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    max-height: calc(100vh - 80px); /* Ajusta para caber na tela */
+    justify-content: center;
+    overflow-y: auto;
+    margin-top: 150px; /* Garante que o conteúdo fique abaixo da header */
+    padding: 20px;
+}
+
+#grid-item {
+    color: white;
+    padding: 1px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 100px;
+}

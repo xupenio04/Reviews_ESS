@@ -31,7 +31,7 @@ export default function Home() {
     return (
         <div id='home'>
             <Sidebar id='sidebar' isLogin={isLogin} setIsLogin={setIsLogin} />
-            <div id='content'>
+            <div id='content' data-testid="form-container">
                 {!isTransitioning ? (<FormCadastro />) : (<FormLogin />)}
             </div>
         </div>

@@ -59,4 +59,68 @@ const deleteComment = async (req, res) => {
     }
 
 };
-module.exports = { createComment, deleteComment};
+const likeComment = async (req, res) => {
+    const { commentId } = req.body;
+    console.log("entrou em like")
+    if (!commentId) {
+        console.log("inválido" + commentId)
+        return res.status(400).json({ message: "O ID do comentário é obrigatório" });
+    }
+    if (!req.user || !req.user.id) {
+        console.log("user")
+        return res.status(401).json({ message: "Usuário não autenticado" });
+    }
+
+    try {
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            console.log("commentario nao encontrado")
+            return res.status(404).json({ message: "Comentário não encontrado" });
+        }
+        if (comment.likes.includes(req.user.id)) {
+            console.log("já curtiu")
+            return res.status(400).json({ message: "Você já curtiu este comentário" });
+        }
+        comment.likes.push(req.user.id);
+        await comment.save();
+        console.log("salvou o comentário");
+        return res.status(200).json({ message: "Comentário curtido com sucesso", comment });
+    } catch (error) {
+        console.error("Erro ao curtir o comentário:", error);
+        console.log(error)
+        return res.status(500).json({ message: "Erro interno ao curtir o comentário", error });
+    }
+};
+const unlikeComment = async (req, res) => {
+    const { commentId } = req.body;
+    if (!commentId) {
+        return res.status(400).json({ message: "O ID do comentário é obrigatório" });
+    }
+    if (!req.user || !req.user.id) {
+        return res.status(401).json({ message: "Usuário não autenticado" });
+    }
+
+    try {
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            return res.status(404).json({ message: "Comentário não encontrado" });
+        }   
+
+        
+        const likeIndex = comment.likes.indexOf(req.user.id);
+        if (likeIndex === -1) {
+            return res.status(400).json({ message: "Você não curtiu este comentário ainda" });
+        }
+
+        
+        comment.likes.splice(likeIndex, 1);
+        await comment.save();
+
+        return res.status(200).json({ message: "Comentário descurtido com sucesso", comment });
+    } catch (error) {
+        console.error("Erro ao descurtir o comentário:", error);
+        return res.status(500).json({ message: "Erro interno ao descurtir o comentário", error });
+    }
+};
+    
+module.exports = {createComment, deleteComment, likeComment, unlikeComment};

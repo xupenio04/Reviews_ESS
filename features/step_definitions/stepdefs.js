@@ -813,15 +813,15 @@ When("uma requisição POST sem classificação, mas com gênero {string}, títu
     }
 })
 
-Then('a review retornada deve ter título {string}, corpo {string}, classificação {int} e conteúdo {string}', async function(titulo, corpo, classificacao, content){
+Then('a review retornada deve ter título {string}, corpo {string}, classificação {int} e conteúdo {string}', async function(titulo, corpo, classificacao, movie){
     const expectedReview = {
         title: titulo,
         body: corpo,
         classification: classificacao,
-        content: content
+        movie: movie
     };
 
-    const jsonResponse = (({title,body,classification,content}) => ({title,body,classification,content}))(response.data.review[0]);
+    const jsonResponse = (({title,body,classification,movie}) => ({title,body,classification,movie}))(response.data.review.at(response.data.review.length-1));
 
     assert.deepEqual(expectedReview, jsonResponse, "O filme retornado não confere com o registrado");
 });

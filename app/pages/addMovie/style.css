@@ -1,0 +1,15 @@
+#cad {
+    position: relative;
+    width: 100vw;       
+    height: 100vh;      
+    background-color: #F7E7DC;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

@@ -1,0 +1,15 @@
+#notFound {
+    display: flex;
+    flex-direction: column;  
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;           
+    text-align: center;      
+}
+
+#messageNotFound {
+    margin-top: 20px;
+    color: #FD0808;
+    font-family: "Nunito", serif;
+    font-size: 24px;
+}

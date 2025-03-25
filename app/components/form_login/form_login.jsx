@@ -38,6 +38,7 @@ export default function FormLogin() {
                 setErrorMessage(`Bem-vindo, ${data.user.name}!`);
                 message.style.color = 'green';
                 localStorage.setItem('userName', JSON.stringify(data));
+                localStorage.setItem('user', JSON.stringify(data.user));
                 localStorage.setItem('userToken', JSON.stringify(data.token));
                 router.push('/pages/initial_page'); // Redireciona para a tela inicial
             } else {

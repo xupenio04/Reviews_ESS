@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaseok+One&display=swap');
+
+
+#general {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;  
+    gap: 12px;
+    align-items: flex-start;
+}
+
+#filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#titulo {
+    font-family: gasoek-one, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#movieButton {
+    color: #FFFFFF;
+    background-color: #243642;
+    border: 0.1px solid #E2F1E7;
+    float: left;
+    height: 35px;
+    width: 150px;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: gasoek-one, sans-serif;
+    font-style: normal;
+    cursor: pointer;
+    border-radius: 14px 0% 0% 14px;
+}
+
+#genreButton {
+    color: #FFFFFF;
+    background-color: #243642;
+    border: 0.1px solid #E2F1E7;;
+    float: left;
+    height: 35px;
+    width: 150px;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: gasoek-one, sans-serif;
+    font-style: normal;
+    cursor: pointer;
+}
+
+#classificationButton {
+    color: #FFFFFF;
+    background-color: #243642;
+    border: 0.1px solid #E2F1E7;;
+    float: left;
+    height: 35px;
+    width: 150px;
+    line-height: 30px;
+    font-weight: bold;
+    font-family: gasoek-one, sans-serif;
+    font-style: normal;
+    cursor: pointer;
+    border-radius: 0% 14px 14px 0%;
+}
+
+#movieButton:hover {
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 16px 16px 0 rgba(0,0,0,0.19);
+    border: 2px solid #E2F1E7;
+}
+
+#classificationButton:hover {
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 16px 16px 0 rgba(0,0,0,0.19);
+    border: 2px solid #E2F1E7;
+}
+
+#genreButton:hover {
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 16px 16px 0 rgba(0,0,0,0.19);
+    border: 2px solid #E2F1E7;
+}
+
+#filterContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    width: 150px;
+    background-color: #243642;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0 0;
+    border-radius: 5px;
+    float: left;
+
+    max-height: 150px; 
+    overflow-y: auto; 
+
+    z-index: 2;
+}
+
+.dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 10px;
+}
+
+.dropdown li {
+    padding: 8px 12px;
+    color: #FFFFFF;
+    cursor: pointer;
+    border: #FFFFFF;
+    transition: background 0.2s;
+    font-weight: bold;
+    font-family: gasoek-one, sans-serif;
+    font-style: normal;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #E2F1E7;
+}
+
+#appliedFilter {
+    position: relative;
+    display: flex;         /* Muda para inline-flex para garantir o ajuste correto ao conteúdo */
+    padding: 10px 30px 10px 10px;          
+    background-color: #405d72;
+    color: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    
+    font-family: gasoek-one, sans-serif;    
+    font-size: 18px;
+    font-weight: bold;
+    
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    transition-duration: 400ms;
+    align-items: center;  
+    justify-content: center;      
+    width: fit-content;
+    flex:none;
+}
+
+#appliedFilter:hover {
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,0.24), 0 16px 16px 0 rgba(0,0,0,0.19);
+}
+
+#svg_container{
+    position: absolute;
+    cursor: pointer;
+    right: 30px;
+    top: 20%;
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 1;
+}
+
+#svgoff, #svgon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  #svgon {
+    opacity: 0;
+  }
+  
+  #svg_container:hover #svgon {
+    opacity: 1; 
+  }
+  
+  #svg_container:hover #svgoff {
+    opacity: 0;
+  }
+  

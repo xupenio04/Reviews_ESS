@@ -63,8 +63,9 @@ export default function ReviewDetail() {
       <Button label="Postar" onClick={handleConfirm}/>
       {reviews.map((review) => (
         <div className="reviewsContainer"> 
-          <Link href={`/pages/review_detail/${review._id}`} className="review-link"> 
-            <Review key={review._id} reviewId={review._id} />
+          <Link href={`/pages/review_detail/${review._id}`} className="review-link" > 
+            <Review key={review._id} reviewId={review._id} 
+  data-testid={`post-${review._id.toString()}`}/>
           </Link>
         </div>  
       ))}

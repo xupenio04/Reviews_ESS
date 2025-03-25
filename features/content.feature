@@ -7,7 +7,7 @@ Scenario: Cadastrar novo filme
     Given que o usuário "Breno" está autenticado no sistema
     And "Breno" possui acesso a conta de administrador
     And o filme "Whiplash" não está disponível no sistema
-    When é enviado novo conteúdo com uma requisição POST com JSON nome "Whiplash", gênero "Animação", classificação indicativa "Livre", capa "exemplo/whiplash.png", título "whiplash" para a route "http://localhost:5001/movies/add"
+    When é enviado novo conteúdo com uma requisição POST com JSON nome "Whiplash", gênero "Animação", classificação indicativa "Livre", capa "https://m.media-amazon.com/images/I/914trm0WbIL._AC_UF894,1000_QL80_.jpg", título "whiplash" para a route "http://localhost:5001/movies/add"
     Then o status da resposta deve ser "201"
     And o JSON da resposta deve conter "Filme foi cadastrado com sucesso"
 
@@ -27,15 +27,15 @@ Scenario: Cadastrar filme com informações insuficientes
     And o JSON da resposta deve conter "Todos os campos devem ser preenchidos"
 
 Scenario: Procurar um filme pelo nome
-    Given o filme "Pistoleiro Papaco" já está disponível no sistema com gênero "Cowboy", classificação indicativa "Livre", capa "exemplo/papaco.png", título "papaco"
-    When é enviada uma busca com uma requisição GET pelo filme de nome "Pistoleiro Papaco" para a route "http://localhost:5001/movies/get"
+    Given o filme "Pistoleiro" já está disponível no sistema com gênero "Cowboy", classificação indicativa "Livre", capa "https://upload.wikimedia.org/wikipedia/pt/d/d8/Pistoleiro_1975_CN_1087.jpg", título "pistol"
+    When é enviada uma busca com uma requisição POST pelo filme de nome "Pistoleiro" para a route "http://localhost:5001/movies/get"
     Then o status da resposta deve ser "201"
     And o JSON da resposta deve conter "Filme foi encontrado"
-    And o filme retornado deve ter nome "Pistoleiro Papaco", gênero "Cowboy", classificação indicativa "Livre", capa "exemplo/papaco.png", título "papaco"
+    And o filme retornado deve ter nome "Pistoleiro", gênero "Cowboy", classificação indicativa "Livre", capa "https://upload.wikimedia.org/wikipedia/pt/d/d8/Pistoleiro_1975_CN_1087.jpg", título "pistol"
 
 Scenario: Procurar um filme inexistente
     Given o filme "Anora" não está disponível no sistema
-    When é enviada uma busca com uma requisição GET pelo filme de nome "Anora" para a route "http://localhost:5001/movies/get"
+    When é enviada uma busca com uma requisição POST pelo filme de nome "Anora" para a route "http://localhost:5001/movies/get"
     Then o status da resposta deve ser "400"
     And o JSON da resposta deve conter "Filme não foi encontrado"
 
@@ -57,10 +57,10 @@ Scenario: Deletar um filme que não existe
 Scenario: Atualizar valores de um filme existente
     Given que o usuário "Polita" está autenticado no sistema
     And o filme "A Lista de Schindler" já está disponível no sistema com gênero "Drama", classificação indicativa "+14", capa "exemplo/schindler.png", título "schindler"
-    When uma requisição de modificação POST é enviada para o filme de nome "A Lista de Schindler", gênero "Drama", classificação indicativa "+14", capa "exemplo/ListaSchindler.png", título "CapaDeSchindler" para a route "http://localhost:5001/movies/update"
+    When uma requisição de modificação POST é enviada para o filme de nome "A Lista de Schindler", gênero "Drama", classificação indicativa "+14", capa "https://br.web.img2.acsta.net/pictures/19/04/10/19/44/2904073.jpg", título "CapaDeSchindler" para a route "http://localhost:5001/movies/update"
     Then o status da resposta deve ser "201"
     And o JSON da resposta deve conter "Filme A Lista de Schindler foi atualizado" 
-    And o filme retornado deve ter nome "A Lista de Schindler", gênero "Drama", classificação indicativa "+14", capa "exemplo/ListaSchindler.png", título "CapaDeSchindler"
+    And o filme retornado deve ter nome "A Lista de Schindler", gênero "Drama", classificação indicativa "+14", capa "https://br.web.img2.acsta.net/pictures/19/04/10/19/44/2904073.jpg", título "CapaDeSchindler"
 
 Scenario: Atualizar valores de um filme que não existe
     Given que o usuário "Polita" está autenticado no sistema

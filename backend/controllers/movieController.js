@@ -94,7 +94,7 @@ const findMovie = async (req,res) => {
             res.status(400).json({movie: null, message: "Filme não foi encontrado"})
         }
     } catch(error){
-        return res.status(500).json({message: "Erro no apagamento do filme ",error})
+        return res.status(500).json({message: "Erro na procura do filme ",error})
     }
 }
 const findMovieById = async (req,res) => {

@@ -1,4 +1,4 @@
-// File: /Users/luanthiers/Desktop/Projetos/Projeto_ESS/reviews_/app/pages/review_detail/[reviewId]/page.tsx
+// File: /Users/anapaula/Desktop/reviews/app/pages/review_detail/[reviewId]/page.tsx
 import * as entry from '../../../../../../app/pages/review_detail/[reviewId]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
