@@ -6,14 +6,38 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
   const [detailedWatchedMovies, setDetailedWatchedMovies] = useState([]);
   const [abandonedMovies, setAbandonedMovies] = useState([]);
   const [detailedAbandonedMovies, setDetailedAbandonedMovies] = useState([]);
-  const [combinedMovies, setCombinedMovies] = useState([]);
   const [detailedCombinedMovies, setDetailedCombinedMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState('Carregando...');
 
   // Função para voltar à página anterior
   const handleBack = () => {
     window.location.href= '/pages/create_review';
   };
+
+  const fetchUserData = async () => {
+    try {
+        const storedName = localStorage.getItem('userName');
+        if (!storedName) {
+            console.error("Nome de usuário não encontrado no localStorage.");
+            return;
+        }
+
+        const data = JSON.parse(storedName);
+        if (!data || !data.user || !data.user.name) {
+            console.error("Dados inválidos encontrados no localStorage.");
+            return;
+        }
+
+        const username = data.user.name;
+        setUserName(username); // Atualiza o estado do nome do usuário
+        fetchWatchedList(username);
+        fetchAbandonedList(username);
+    } catch (error) {
+        console.error("Erro ao recuperar dados do usuário:", error.message);
+    }
+};
+
 
   // Função para buscar a lista de filmes assistidos
   const fetchWatchedList = async (name) => {
@@ -52,36 +76,6 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
     }
   };
 
-  const fetchAllList = async (name) => {
-    try {
-      // Busca a lista de filmes assistidos
-      const responseWatched = await fetch(`http://localhost:5001/users/${name}/watched`);
-      if (!responseWatched.ok) {
-        throw new Error(`Erro ao buscar lista de assistidos: ${responseWatched.status}`);
-      }
-      const watchedMovies = await responseWatched.json();
-  
-      // Busca a lista de filmes abandonados
-      const responseAbandoned = await fetch(`http://localhost:5001/users/${name}/abandoned`);
-      if (!responseAbandoned.ok) {
-        throw new Error(`Erro ao buscar lista de abandonados: ${responseAbandoned.status}`);
-      }
-      const abandonedMovies = await responseAbandoned.json();
-  
-      // Adiciona uma propriedade `type` para identificar a lista de origem
-      const combinedMovies = [
-        ...watchedMovies.map(movie => ({ ...movie, type: "watched" })),
-        ...abandonedMovies.map(movie => ({ ...movie, type: "abandoned" }))
-      ];
-  
-      // Retorna o JSON combinado
-      console.log(combinedMovies);
-      setCombinedMovies(combinedMovies);
-    } catch (error) {
-      console.error("Erro ao buscar as listas de filmes:", error.message);
-      throw error; // Propaga o erro para ser tratado no chamador
-    }
-  };
 
   const fetchMovieDetails = async (movieName) => {
     try {
@@ -121,11 +115,8 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
   };
 
   useEffect(() => {
-    console.log({ IsWatched, IsAbandoned, IsSearch });
-    const userName = 'xupenio';
-    fetchWatchedList(userName);
-    fetchAbandonedList(userName);
-    fetchAllList(userName);
+
+  fetchUserData();
   }, []);
 
   useEffect(() => {
@@ -136,9 +127,6 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
     fetchMoviesDetails(abandonedMovies, setDetailedAbandonedMovies);
   }, [abandonedMovies]);
 
-  useEffect(() => {
-    fetchMoviesDetails(combinedMovies, setDetailedCombinedMovies);
-  }, [combinedMovies]);
 
   useEffect(() => {
     if (detailedWatchedMovies.length > 0 || detailedAbandonedMovies.length > 0 || detailedCombinedMovies.length > 0) {
@@ -146,7 +134,6 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
     }
   }, [detailedWatchedMovies, detailedAbandonedMovies, detailedCombinedMovies]);
 
-  // Verifica se ambas as listas estão vazias
   const noMoviesFound = detailedWatchedMovies.length === 0 && detailedAbandonedMovies.length === 0;
 
   return (

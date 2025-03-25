@@ -6,15 +6,44 @@ export default function PopUpAdicao({ SetIsAddButton }) {
   const [IsWatched, SetIsWatched] = useState(false);
   const [IsAbandoned, SetIsAbandoned] = useState(false);
   const [errorMessage, setErrorMessage] = useState(''); // Adicione esta linha
+  const [userName, setUserName] = useState('Carregando...');
 
   useEffect(() => {
     const IsBackButton = document.getElementById('backButton');
     IsBackButton.addEventListener('click', () => SetIsAddButton(false));
 
+    fetchUserData();
+
     return () => {
       IsBackButton.removeEventListener('click', () => SetIsAddButton(false));
     };
+    
   }, []);
+
+
+  const fetchUserData = async () => {
+    try {
+        const storedName = localStorage.getItem('userName');
+        if (!storedName) {
+            console.error("Nome de usuário não encontrado no localStorage.");
+            return;
+        }
+
+        const data = JSON.parse(storedName);
+        if (!data || !data.user || !data.user.name) {
+            console.error("Dados inválidos encontrados no localStorage.");
+            return;
+        }
+
+        const userName = data.user.name;
+        console.log(userName);
+        setUserName(userName); // Atualiza o estado do nome do usuário
+        
+    } catch (error) {
+        console.error("Erro ao recuperar dados do usuário:", error.message);
+    }
+};
+
 
   async function sendInfos(event) {
     event.preventDefault();
@@ -24,16 +53,18 @@ export default function PopUpAdicao({ SetIsAddButton }) {
     const response = JSON.stringify({ titleFilme, userAvaliation, watched: IsWatched, abandoned: IsAbandoned });
     const data = JSON.parse(response);
 
-    // Verifica se o filme já está na lista de assistidos ou abandonados
-    const user = 'xupenio'; // Substitua pelo nome de usuário dinâmico, se necessário
 
     try {
       // Busca a lista de filmes assistidos
-      const watchedResponse = await fetch(`http://localhost:5001/users/${user}/watched`);
+
+      //const name =fetchUserData();
+
+      //console.log(name);
+      const watchedResponse = await fetch(`http://localhost:5001/users/${userName}/watched`);
       const watchedMovies = await watchedResponse.json();
 
       // Busca a lista de filmes abandonados
-      const abandonedResponse = await fetch(`http://localhost:5001/users/${user}/abandoned`);
+      const abandonedResponse = await fetch(`http://localhost:5001/users/${userName}/abandoned`);
       const abandonedMovies = await abandonedResponse.json();
 
       // Verifica se o filme já está em alguma lista
@@ -42,13 +73,13 @@ export default function PopUpAdicao({ SetIsAddButton }) {
 
       if (isMovieInWatched || isMovieInAbandoned) {
         setErrorMessage('Este filme já está na lista.');
-        return; // Interrompe a função se o filme já estiver na lista
+        return; 
       }
 
       // Se o filme não estiver na lista, procede com a adição
       if (data.watched) {
         const request = {
-          name: user,
+          name: userName,
           title: data.titleFilme,
           avaliation: data.userAvaliation
         };
@@ -66,7 +97,7 @@ export default function PopUpAdicao({ SetIsAddButton }) {
         }
       } else if (data.abandoned) {
         const request = {
-          name: user,
+          name: userName,
           title: data.titleFilme,
           avaliation: data.userAvaliation
         };

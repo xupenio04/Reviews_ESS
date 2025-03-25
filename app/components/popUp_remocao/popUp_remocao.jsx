@@ -6,10 +6,12 @@ export default function PopUpRemocao({ SetIsRemoveButton }) {
     const [IsWatched, SetIsWatched] = useState(false);
     const [IsAbandoned, SetIsAbandoned] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [userName, setUserName] = useState('Carregando...');
 
     useEffect(() => {
         const backButton = document.getElementById('backButton');
         const handleClick = () => SetIsRemoveButton(false);
+        fetchUserData();
 
         if (backButton) {
             backButton.addEventListener('click', handleClick);
@@ -21,6 +23,30 @@ export default function PopUpRemocao({ SetIsRemoveButton }) {
             }
         };
     }, []);
+
+
+    const fetchUserData = async () => {
+      try {
+          const storedName = localStorage.getItem('userName');
+          if (!storedName) {
+              console.error("Nome de usuário não encontrado no localStorage.");
+              return;
+          }
+  
+          const data = JSON.parse(storedName);
+          if (!data || !data.user || !data.user.name) {
+              console.error("Dados inválidos encontrados no localStorage.");
+              return;
+          }
+  
+          const userName = data.user.name;
+          console.log(userName);
+          setUserName(userName); // Atualiza o estado do nome do usuário
+          
+      } catch (error) {
+          console.error("Erro ao recuperar dados do usuário:", error.message);
+      }
+  };
 
     async function sendInfos(event) {
         event.preventDefault();
@@ -36,12 +62,11 @@ export default function PopUpRemocao({ SetIsRemoveButton }) {
           return;
         }
       
-        const user = 'xupenio'; // Substitua pelo nome de usuário dinâmico, se necessário
         const listType = IsWatched ? 'watched' : 'abandoned';
       
         try {
           // Busca a lista de filmes selecionada
-          const listResponse = await fetch(`http://localhost:5001/users/${user}/${listType}`);
+          const listResponse = await fetch(`http://localhost:5001/users/${userName}/${listType}`);
           if (!listResponse.ok) {
             throw new Error(`Erro ao buscar a lista de ${listType}.`);
           }
@@ -56,7 +81,7 @@ export default function PopUpRemocao({ SetIsRemoveButton }) {
           }
       
           // Se o filme estiver na lista, procede com a remoção
-          const url = `http://localhost:5001/users/${user}/${listType}/${encodeURIComponent(titleFilme)}`;
+          const url = `http://localhost:5001/users/${userName}/${listType}/${encodeURIComponent(titleFilme)}`;
           const response = await fetch(url, {
             method: "DELETE",
           });

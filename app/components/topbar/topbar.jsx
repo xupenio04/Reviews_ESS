@@ -7,6 +7,29 @@ import { useEffect, useState } from 'react';
  function TopBar({SetIsAddButton, SetIsRemoveButton,SetIsWatched,SetIsAbandoned,onSearch}){
 
     const [userName, setUserName] = useState('Carregando...');
+    
+    const fetchUserData = async () => {
+        try {
+            const storedName = localStorage.getItem('userName');
+            if (!storedName) {
+                console.error("Nome de usuário não encontrado no localStorage.");
+                return;
+            }
+    
+            const data = JSON.parse(storedName);
+            if (!data || !data.user || !data.user.name) {
+                console.error("Dados inválidos encontrados no localStorage.");
+                return;
+            }
+    
+            const userName = data.user.name;
+            setUserName(userName); // Atualiza o estado do nome do usuário
+    
+            // Passa diretamente para as funções de fetch
+        } catch (error) {
+            console.error("Erro ao recuperar dados do usuário:", error.message);
+        }
+    };
 
     useEffect(() => {
         const IsAddButton = document.getElementById('addButton');
@@ -30,30 +53,6 @@ import { useEffect, useState } from 'react';
            SetIsAbandoned(true);
            SetIsWatched(false);
         })
-
-        const fetchUserData = async () => {
-            try {
-                const storedName = localStorage.getItem('Username' );
-                if (storedName) {
-                    setUserName(storedName);
-                    return;
-                }
-
-                const loggedInUserName = 'xupenio';
-                const response = await fetch(`http://localhost:5001/users/find/${loggedInUserName}`);
-                
-                if (!response.ok) throw new Error('Usuário não encontrado');
-                
-                const userData = await response.json();
-                if (!userData.name) throw new Error('Nome não encontrado nos dados');
-                
-                localStorage.setItem('Username', userData.name);
-                setUserName(userData.name);
-            } catch (error) {
-                console.error('Falha ao carregar perfil:', error);
-                setUserName('Visitante');
-            }
-        };
 
         fetchUserData();
     
