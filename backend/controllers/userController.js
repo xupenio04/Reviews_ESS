@@ -63,6 +63,35 @@ const findUser = async (req, res) => {
   }
 };
 
+const findUserID = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Verificar se o ID é válido
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'ID inválido' });
+    }
+
+    // Converter o userId para ObjectId
+    const objectId = new mongoose.Types.ObjectId(userId);
+
+    // Busca o usuário no banco de dados
+    const user = await User.findById(objectId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    // Aqui vamos exibir o erro completo no log do servidor
+    console.error("Erro ao buscar usuário:", error);
+
+    // Retorna uma resposta genérica com um status 500
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
+  }
+};
+
 const followUser = async (req, res) => {
   try{
     const {originName, destinationName} = req.body;
@@ -325,4 +354,4 @@ const deleteAbandoned = async (req, res) => {
 
 
 
-module.exports = { createUser, getUsers, findUser, followUser, deleteUser, updateUser, addWatched, addAbandoned,getWatched, getAbandoned, deleteWatched, deleteAbandoned};
+module.exports = { createUser, getUsers, findUser, followUser, deleteUser, updateUser, addWatched, addAbandoned, getWatched, getAbandoned, deleteWatched, deleteAbandoned, findUserID};
