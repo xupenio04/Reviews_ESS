@@ -2,10 +2,11 @@
 const { BeforeAll, AfterAll, Given, When, Then } = require("@cucumber/cucumber");
 const request = require('supertest');
 const assert = require('assert');
+const app = require('../../backend/app');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');// Banco Em memoria para Tests
 
-const BASE_URL = process.env.TEST_URL || 'http://localhost:5001';
+//const app = process.env.TEST_URL || 'http://localhost:5001';
 
 let mongoServer;
 const user = {
@@ -18,9 +19,12 @@ BeforeAll(async function () {
     try {
         mongoServer = await MongoMemoryServer.create();
         const uri = mongoServer.getUri();
+        if (!uri) {
+            console.log("URI do MongoDB é undefined.");
+        }
         await mongoose.connect(uri);
 
-        const res = await request(BASE_URL)
+        const res = await request(app)
             .post('/users/add/')
             .send(user)
         assert.strictEqual(res.statusCode, 201);
@@ -38,10 +42,11 @@ AfterAll(async function () {
     }
 });
 
+
 Given('as seguintes notas do usuario {string} existem:', async function (string, dataTable) {
     const dataTableNew = dataTable.hashes();
     for (element of dataTableNew) {
-        const res = await request(BASE_URL)
+        const res = await request(app)
             .post('/notes/add/')
             .send({
                 email: string,
@@ -54,7 +59,7 @@ Given('as seguintes notas do usuario {string} existem:', async function (string,
 
 Then('as seguintes notas devem existir do usuario {string}:', async function (string, dataTable) {
     const dataTableNew = dataTable.hashes();
-    const res = await request(BASE_URL)
+    const res = await request(app)
         .get(`/notes/${string}`)
 
     for (let index = 0; index < dataTableNew.length; index++) {
@@ -69,14 +74,14 @@ When('adiciono uma nova nota para o title {string}, com o seguinte texto {string
         title: string,
         note: string1
     };
-    const res = await request(BASE_URL)
+    const res = await request(app)
         .post('/notes/add/')
         .send(newNote)
     assert.strictEqual(res.statusCode, 201);
 });
 
 When('edito a nota do title {string} para {string} do usuario {string}', async function (string, string1, string2) {
-    const res = await request(BASE_URL)
+    const res = await request(app)
         .put('/notes/edit')
         .send({
             email: string2,
@@ -87,7 +92,7 @@ When('edito a nota do title {string} para {string} do usuario {string}', async f
 });
 
 When('remover a nota do title {string} do usuario {string}', async function (string, string1) {
-    const res = await request(BASE_URL)
+    const res = await request(app)
         .del('/notes/dell')
         .send({
             email: string1,

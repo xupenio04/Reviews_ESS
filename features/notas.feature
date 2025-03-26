@@ -35,7 +35,7 @@ Feature: notas
       | title                  | note                           |
       | Um Sonho de Liberdade  | muito emocionantes             |
       | O Poderoso Chefão      | uma obra de primeira qualidade |
-      | O Cavaleiro das Trevas | um ótimo filme                 |
+      | O Cavaleiro das Trevas | Meu favorito                   |
     When remover a nota do title "O Poderoso Chefão" do usuario "ajs6@gmail.com"
     Then as seguintes notas devem existir do usuario "ajs6@gmail.com":
       | title                  | note               |
