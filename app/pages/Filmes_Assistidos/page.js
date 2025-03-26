@@ -11,20 +11,24 @@ import './style.css';
 export default function Home() {
     const [IsAddButton, SetIsAddButton] = useState(false);
     const [IsRemoveButton, SetIsRemoveButton] = useState(false);
-    const [IsWatched, SetIsWatched] = useState(true); // Inicia com filmes assistidos
+    const [IsWatched, SetIsWatched] = useState(true); 
     const [IsAbandoned, SetIsAbandoned] = useState(false);
     const [movies, setMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [IsSearch, setIsSearch] = useState(false);
+    const [userName, setUserName] = useState('Carregando...');
 
 
-    // Simulando a busca de filmes no backend
+    /*
     useEffect(() => {
+        fetchUserData();
+        console.log(userName);
         async function fetchMovies() {
-            const user = "xupenio";
+            
+            fetchUserData();
 
-            const watchedResponse = await fetch(`http://localhost:5001/users/${user}/watched`);
-            const abandonedResponse = await fetch(`http://localhost:5001/users/${user}/abandoned`);
+            const watchedResponse = await fetch(`http://localhost:5001/users/${userName}/watched`);
+            const abandonedResponse = await fetch(`http://localhost:5001/users/${userName}/abandoned`);
 
             const watchedMovies = await watchedResponse.json();
             const abandonedMovies = await abandonedResponse.json();
@@ -40,6 +44,7 @@ export default function Home() {
 
         fetchMovies();
     }, []);
+    */
 
     useEffect(() => {
         if (IsWatched) {
@@ -52,10 +57,9 @@ export default function Home() {
 
 
     const handleSearch = (searchValue) => {
-        setSearchTerm(searchValue); // Atualiza o termo de busca
+        setSearchTerm(searchValue); 
 
         if (!searchValue) {
-            // Se o campo de busca estiver vazio, mostra todos os filmes do tipo selecionado
             if (IsWatched) {
                 setFilteredMovies(movies.filter(movie => movie.type === "watched"));
             } else if (IsAbandoned) {
@@ -64,7 +68,6 @@ export default function Home() {
             return;
         }
 
-        // Filtra os filmes com base no termo de busca
         const filtered = movies.filter(movie =>
             movie.title.toLowerCase().includes(searchValue.toLowerCase())
         );

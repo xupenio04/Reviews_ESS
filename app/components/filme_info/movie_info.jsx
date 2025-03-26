@@ -9,11 +9,36 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
   const [detailedCombinedMovies, setDetailedCombinedMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState('Carregando...');
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
 
-  // Função para voltar à página anterior
   const handleBack = () => {
-    window.location.href= '/pages/create_review';
+    window.location.href= '/pages/page_userProfile';
   };
+
+  const handleSearch = async (searchQuery) => {
+    if (searchQuery.trim() === "") {
+      setUserData(null);
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5001/users/find/${searchQuery}`);
+      if (response.status === 200) {
+        const data = await response.json();
+        setUserData(data);
+        setError(null);
+      } else {
+        setUserData(null);
+        setError("Usuário não encontrado");
+      }
+    } catch (err) {
+      console.error("Erro ao buscar usuário:", err);
+      setUserData(null);
+      setError("Erro ao conectar ao servidor.");
+    }
+  };
+
 
   const fetchUserData = async () => {
     try {
@@ -28,9 +53,9 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
             console.error("Dados inválidos encontrados no localStorage.");
             return;
         }
-
+        
         const username = data.user.name;
-        setUserName(username); // Atualiza o estado do nome do usuário
+        setUserName(username); 
         fetchWatchedList(username);
         fetchAbandonedList(username);
     } catch (error) {
@@ -43,7 +68,6 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
   const fetchWatchedList = async (name) => {
     try {
       const response = await fetch(`http://localhost:5001/users/${name}/watched`);
-      
       if (!response.ok) {
         const errorDetails = await response.text();
         console.error("Erro na resposta da API:", response.status, errorDetails);
@@ -115,9 +139,11 @@ export default function MovieInfo({ IsWatched, IsAbandoned, IsSearch }) {
   };
 
   useEffect(() => {
-
+  
   fetchUserData();
+  
   }, []);
+
 
   useEffect(() => {
     fetchMoviesDetails(watchedMovies, setDetailedWatchedMovies);

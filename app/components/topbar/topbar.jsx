@@ -22,8 +22,9 @@ import { useEffect, useState } from 'react';
                 return;
             }
     
-            const userName = data.user.name;
-            setUserName(userName); 
+            const username = data.user.name;
+            
+            setUserName(username); 
     
            
         } catch (error) {
@@ -89,7 +90,7 @@ import { useEffect, useState } from 'react';
                                 </clipPath>
                                 </defs>
                                 </svg>
-                                <p className="profile">{userName}</p>
+                                <p id="profile">{userName}</p>
                         </div>
 
         </div>

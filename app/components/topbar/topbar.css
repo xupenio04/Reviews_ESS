@@ -43,7 +43,7 @@
    flex-direction: column;
 }
 
-.profile{
+#profile{
     align-self: center;
     font-family: "Gasoek One", sans-serif;
     font-size: 24px;
