@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 // File: /home/pvsc/Documentos/CIn/6 Período/ESS/ESS_projeto/Reviews_ESS/app/pages/cadastro/page.js
-=======
-// File: /Users/anapaula/Desktop/reviews/app/pages/cadastro/page.js
->>>>>>> upstream/dev
 import * as entry from '../../../../../app/pages/cadastro/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

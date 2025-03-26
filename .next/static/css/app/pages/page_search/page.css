@@ -1,0 +1,167 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/pages/page_search/style_pageSearch.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************/
+.top-banner {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 150px;
+  background-color: #387478;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-card {
+  margin-top: 50px; /* Adiciona espaçamento entre o TopBanner e o UserCard */
+  margin-left: 50px;
+}
+
+.avatar {
+  width: 130px; /* Largura do avatar */
+  height: 130px; /* Altura do avatar */
+  border-radius: 50%; /* Formato circular */
+  overflow: hidden; /* Garante que o SVG não ultrapasse os limites */
+  background-color: #ccc; /* Cor de fundo temporária para teste */
+}
+
+.avatar svg {
+  width: 100%; /* Ocupa 100% da largura do contêiner */
+  height: 100%; /* Ocupa 100% da altura do contêiner */
+}
+
+.error-message {
+  position: fixed; /* Fixa a mensagem na tela */
+  top: 50%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta a posição para realmente centralizar */
+  font-size: 3rem; /* Tamanho grande da fonte */
+  color: red; /* Cor da mensagem de erro */
+  text-align: center; /* Alinha o texto no centro */
+  background-color: rgba(247, 243, 243, 0.7); /* Fundo escuro para destacar a mensagem */
+  padding: 20px; /* Espaçamento interno */
+  border-radius: 10px; /* Bordas arredondadas */
+  z-index: 1000; /* Garante que a mensagem apareça acima de outros elementos */
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 480px;
+}
+
+.back-button:hover {
+  background-color: #020b0b;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/search_bar/search_bar.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+#container {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 25px;
+    padding: 8px 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 800px;
+    height: 50px;
+  }
+  
+  #container:focus-within {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  #bar {
+    flex: 1 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    padding: 8px;
+    color: #333;
+  }
+  
+  #bar::placeholder {
+    color: #999;
+  }
+  
+  #lupa {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: color 0.3s ease;
+  }
+  
+  #lupa:hover {
+    color: #000000; /* Cor ao passar o mouse */
+  }
+  
+  #lupa svg {
+    width: 24px;
+    height: 24px;
+  }
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/user_card/user_card.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+.user-card {
+    display: flex;
+    align-items: center;
+    background-color: #f3ece6; /* Bege claro */
+    border-radius: 16px; /* Bordas arredondadas */
+    padding: 16px;
+    width: 340px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  }
+
+  .avatar {
+    width: 100px; /* Largura do avatar */
+    height: 100px; /* Altura do avatar */
+    border-radius: 50%; /* Formato circular */
+    overflow: hidden; /* Garante que o SVG não ultrapasse os limites */
+    background-color: #ccc; /* Cor de fundo temporária para teste */
+  }
+  
+  .avatar svg {
+    width: 100%; /* Ocupa 100% da largura do contêiner */
+    height: 100%; /* Ocupa 100% da altura do contêiner */
+  }
+
+  .user-card:hover{
+    background-color: rgb(218, 218, 209);
+  }
+  .user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Foto em círculo */
+    object-fit: cover;
+    border: 1px solid #d1cfcf; /* Borda fina */
+  }
+  
+  .user-info {
+    margin-left: 12px;
+  }
+  
+  .user-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2b2b2b; /* Preto */
+  }
+  
+  .user-reviews {
+    font-size: 14px;
+    color: #527c5a; /* Verde suave */
+  }
+  
