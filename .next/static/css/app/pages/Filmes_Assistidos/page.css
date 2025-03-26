@@ -231,7 +231,11 @@
    flex-direction: column;
 }
 
+<<<<<<< HEAD
 #profile{
+=======
+.profile{
+>>>>>>> upstream/dev
     align-self: center;
     font-family: "Gasoek One", sans-serif;
     font-size: 24px;
@@ -447,3 +451,45 @@ label{
 
 
 
+<<<<<<< HEAD
+=======
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/footer/Footer.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+.footer {
+    background-color: #243642;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    cursor: pointer;
+    background-color: transparent; /* Remove qualquer fundo */
+  }
+  
+  .logo-container svg {
+    height: 90px; 
+    width: auto;
+    background-color: transparent; /* Remove qualquer fundo */
+    margin-top: 10px;
+  }
+  
+  /* Remova completamente a seção .footer-content */
+  .footer-content {
+    display: none;
+  }
+>>>>>>> upstream/dev

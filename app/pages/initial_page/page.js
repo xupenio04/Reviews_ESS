@@ -1,65 +1,91 @@
 "use client";
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Button from "../../components/button/Button";
 import HeartButton from "../../components/heart_button/heart_button";
 import Review from "../../components/review/reviews";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from "react";
 import "./style.css"
+import Footer from '../../components/footer/Footer';
+import TopBar from '../../components/topbar_all/topbar';
 
 export default function ReviewDetail() {
   const [reviews, setReviews] = useState([]);
-  const [owner, setOwners] = useState([]);
-  const [contents, setContents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const loaderRef = useRef(null);
   const router = useRouter();
-  
+
   const handleClick = (reviewId) => {  
     router.push(`/review_detail/${reviewId}`);
   };
+
   const handleConfirm = () => {  
-    router.push(`/pages/create_review`); 
+    router.push(`/pages/choseMovie`); 
   };
-  useEffect(() => {
-    const fetchReview = async () => {
-      try {
-        const response = await fetch("http://localhost:5001/reviews/get");
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Erro ${response.status}: ${errorText}`);
-        }
 
-        const data = await response.json();
-        
-
-        if (!Array.isArray(data)) {
-          throw new Error('Resposta da API não é um array');
-        }
-
-        setReviews(data);
-        setError(null);
-
-      } catch (err) {
-        console.error("Erro na requisição:", err);
-        setError(err.message);
+  const fetchReviews = useCallback(async () => {
+    if (isLoading || !hasMore) return;
+    
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch(`http://localhost:5001/reviews/get?page=${page}&limit=3`);
       
-        setReviews([]);
-        
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(`Erro ${response.status}: ${await response.text()}`);
+      }
+
+      const data = await response.json();
+      
+      if (!Array.isArray(data.reviews)) {
+        throw new Error('Resposta da API não é um array');
+      }
+
+      setReviews(prev => [...prev, ...data.reviews]);
+      setHasMore(data.hasMore);
+      setPage(prev => prev + 1);
+    } catch (err) {
+      console.error("Erro ao carregar reviews:", err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [page, isLoading, hasMore]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const firstEntry = entries[0];
+        if (firstEntry.isIntersecting && hasMore && !isLoading) {
+          fetchReviews();
+        }
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+
+    const currentLoader = loaderRef.current;
+    if (currentLoader) {
+      observer.observe(currentLoader);
+    }
+
+    return () => {
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
       }
     };
+  }, [fetchReviews, hasMore, isLoading]);
 
-    fetchReview();
+  useEffect(() => {
+    fetchReviews();
   }, []);
-
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p>Erro: {error}</p>;;
 
   return (
     <div className="vertical"> 
+        <TopBar/>
       <Button label="Postar" onClick={handleConfirm}/>
       {reviews.map((review) => (
         <div className="reviewsContainer"> 
@@ -69,6 +95,18 @@ export default function ReviewDetail() {
           </Link>
         </div>  
       ))}
+      <div ref={loaderRef} className="loader">
+        {isLoading && (
+          <div className="loading-spinner">
+            <p>Carregando mais reviews...</p>
+          </div>
+        )}
+      </div>
+      
+      {!hasMore && reviews.length > 0 && (
+        <p className="end-message">Você viu todas as reviews disponíveis!</p>
+      )}
+      <Footer/>
     </div>
   );
 }

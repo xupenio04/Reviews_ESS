@@ -1,8 +1,23 @@
+<<<<<<< HEAD
+<<<<<<<< HEAD:.next/types/app/pages/page_search/page.ts
 // File: /home/pvsc/Documentos/CIn/6 Período/ESS/ESS_projeto/Reviews_ESS/app/pages/page_search/page.js
+=======
+// File: /Users/luanthiers/Desktop/Projetos/Projeto_ESS/reviews_/app/pages/page_search/page.js
+>>>>>>> upstream/dev
 import * as entry from '../../../../../app/pages/page_search/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
 type TEntry = typeof import('../../../../../app/pages/page_search/page.js')
+<<<<<<< HEAD
+========
+// File: /Users/luanthiers/Desktop/Projetos/Projeto_ESS/reviews_/app/pages/choseMovie/page.js
+import * as entry from '../../../../../app/pages/choseMovie/page.js'
+import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
+
+type TEntry = typeof import('../../../../../app/pages/choseMovie/page.js')
+>>>>>>>> upstream/dev:.next/types/app/pages/choseMovie/page.ts
+=======
+>>>>>>> upstream/dev
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }

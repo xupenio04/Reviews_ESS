@@ -1,15 +1,16 @@
 "use client";
-import Button from "../../components/button/Button";
-import StarButton from "../../components/star_button/star_button";
+import Button from "../../../components/button/Button";
+import StarButton from "../../../components/star_button/star_button";
 import { useEffect, useState } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import "./style.css"
 
 export default function CreateReview() {
+  const { movieId } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const movieId = "67dad4119429a2af3f58ddc9"
   const [movie, setMovie] = useState('');
   const [textTitle, setTextTitle] = useState('');
   const [textBody, setTextBody] = useState('');
@@ -40,6 +41,7 @@ export default function CreateReview() {
 
     
       alert('Review enviada com sucesso!');
+      setTimeout(() => setIsMessageVisible(false), 5000);
       setTextTitle('');
       setTextBody(''); 
       router.replace('/pages/initial_page');
@@ -102,6 +104,7 @@ export default function CreateReview() {
                     className="title-textarea" 
                     placeholder="Digite o título da sua review aqui..." 
                     value={textTitle} 
+                    data-testid="title-textarea"
                     onChange={(e) => setTextTitle(e.target.value)} 
                     />
 
@@ -109,6 +112,7 @@ export default function CreateReview() {
                     className="body-textarea" 
                     placeholder="Digite sua opinião aqui..." 
                     value={textBody} 
+                    data-testid="body-textarea"
                     onChange={(e) => setTextBody(e.target.value)} 
                     />
                 </div>
@@ -117,7 +121,7 @@ export default function CreateReview() {
         </div>
       </div>
     </div>
-    <div>
+    <div data-testid="confirm">
           <Button label="Postar" onClick={handleConfirm} />
     </div>
     </div>

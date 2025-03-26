@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // File: /home/pvsc/Documentos/CIn/6 Período/ESS/ESS_projeto/Reviews_ESS/app/pages/review_detail/[reviewId]/page.tsx
+=======
+// File: /Users/luanthiers/Desktop/Projetos/Projeto_ESS/reviews_/app/pages/review_detail/[reviewId]/page.tsx
+>>>>>>> upstream/dev
 import * as entry from '../../../../../../app/pages/review_detail/[reviewId]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

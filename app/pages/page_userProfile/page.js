@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import './style_userProfile.css';
 import ReviewCard from '../../components/review_card/ReviewCard';
+import Footer from '../../components/footer/Footer';
 
 export default function Page() {
   const router = useRouter();
@@ -111,7 +112,7 @@ export default function Page() {
           // Redireciona para a página inicial ou faz logout
           localStorage.removeItem("userName"); // Remove os dados do usuário do localStorage
           setTimeout(() => {
-            window.location.href = '/pages/page_cadastro';
+            window.location.href = '/pages/cadastro';
           }, 200);
         } else {
           const errorData = await response.json();
@@ -152,33 +153,53 @@ export default function Page() {
           <p>{userData ? `${userReviews.length} reviews` : '0 reviews'}   <span className="stars">🎬</span></p>
         </div>
         {userName?.user?.name !== userData?.name && (
-          <button className="follow-btn" onClick={follow} disabled={isFollowing}>
-            {isFollowing ? 'Seguindo' : 'Seguir'}
-          </button>
+          <div data-testid ="follow_button">
+            <button className="follow-btn" onClick={follow} disabled={isFollowing}>
+              {isFollowing ? 'Seguindo' : 'Seguir'}
+            </button>
+          </div>
         )}
-        <button className="followers-btn" onClick={toggleFollowersModal}>
-          Seguidores
-        </button>
+        <div data-testid ="followers_button">
+          <button className="followers-btn" onClick={toggleFollowersModal}>
+            Seguidores
+          </button>
+        </div>
         {userName?.user?.name == userData?.name && (
+          <div data-testid="delete_button">
           <button className="delete-account-btn" onClick={handleDeleteAccount}>
           Excluir Conta
         </button>    
+        </div>
         )}
+
+        <button
+          className="lists-button"
+          onClick={() => {
+            setTimeout(() => {
+              window.location.href = '/pages/Filmes_Assistidos';
+            }, 200);
+          }}
+          >
+          Lista de Filmes
+        </button>
       </div>
 
       {showFollowersModal && <div className="overlay" onClick={toggleFollowersModal}></div>}
 
       {showFollowersModal && (
-        <div className="followers-modal">
-          <h3>Seguidores</h3>
-          <ul>
-            {userData?.followers?.length ? (
-              userData.followers.map((follower, index) => <li key={index}>{follower}</li>)
-            ) : (
-              <li>Nenhum seguidor</li>
-            )}
-          </ul>
-          <button className="close-btn" onClick={toggleFollowersModal}>Fechar</button>
+        
+          <div className="followers-modal">
+            <div data-testid ="followers_list">
+            <h3>Seguidores</h3>
+            <ul>
+              {userData?.followers?.length ? (
+                userData.followers.map((follower, index) => <li key={index}>{follower}</li>)
+              ) : (
+                <li>Nenhum seguidor</li>
+              )}
+            </ul>
+            <button className="close-btn" onClick={toggleFollowersModal}>Fechar</button>
+          </div>
         </div>
       )}
 
@@ -222,6 +243,8 @@ export default function Page() {
     <p className = "no-reviews">Este usuário ainda não possui reviews</p>
   )}
 </div>
-    </div>
+  <Footer/>
+</div>
+
   );
 }

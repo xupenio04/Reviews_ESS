@@ -1,6 +1,7 @@
 /*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/pages/page_search/style_pageSearch.css ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************/
+<<<<<<< HEAD
 .top-banner {
   display: flex;
   justify-content: left;
@@ -59,6 +60,120 @@
 .back-button:hover {
   background-color: #020b0b;
 }
+=======
+/* Estilização do topo */
+.top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 120px;
+  background-color: #2c6367;
+  color: white;
+  padding: 20px 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  .top-banner {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+}
+
+/* Botão de voltar */
+.back-button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.back-button:hover {
+  background-color: #1b4043;
+  transform: scale(1.05);
+}
+
+.back-button:active {
+  transform: scale(0.95);
+}
+
+.user-card-container {
+  display: inline-flex; /* Permite que o container se ajuste ao tamanho do UserCard */
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  margin-top: 30px; /* Espaçamento entre o header e o UserCard */
+}
+
+.user-card-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Garante que o UserCard ocupe toda a largura do container */
+.user-card {
+  width: 100%; 
+  max-width: 320px; /* Define um limite para evitar que fique muito grande */
+}
+
+
+/* Avatar do usuário */
+.avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #629584, #387478);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar svg {
+  width: 80%;
+  height: 80%;
+}
+
+/* Mensagem de erro */
+.error-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.85);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animação para aparecer suavemente */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+>>>>>>> upstream/dev
 /*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/search_bar/search_bar.css ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************/
@@ -71,7 +186,11 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
     width: 100%;
+<<<<<<< HEAD
     max-width: 800px;
+=======
+    max-width: 1600px;
+>>>>>>> upstream/dev
     height: 50px;
   }
   
@@ -87,6 +206,10 @@
     font-size: 16px;
     padding: 8px;
     color: #333;
+<<<<<<< HEAD
+=======
+    width: 1000px;
+>>>>>>> upstream/dev
   }
   
   #bar::placeholder {
@@ -165,3 +288,45 @@
     color: #527c5a; /* Verde suave */
   }
   
+<<<<<<< HEAD
+=======
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/footer/Footer.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+.footer {
+    background-color: #243642;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    cursor: pointer;
+    background-color: transparent; /* Remove qualquer fundo */
+  }
+  
+  .logo-container svg {
+    height: 90px; 
+    width: auto;
+    background-color: transparent; /* Remove qualquer fundo */
+    margin-top: 10px;
+  }
+  
+  /* Remova completamente a seção .footer-content */
+  .footer-content {
+    display: none;
+  }
+>>>>>>> upstream/dev

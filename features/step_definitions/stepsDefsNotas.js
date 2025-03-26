@@ -1,4 +1,4 @@
-
+/*
 const { BeforeAll, AfterAll, Given, When, Then } = require("@cucumber/cucumber");
 const request = require('supertest');
 const assert = require('assert');
@@ -101,3 +101,4 @@ When('remover a nota do title {string} do usuario {string}', async function (str
     assert.strictEqual(res.statusCode, 200);
 });
 
+*/

@@ -133,9 +133,13 @@ p {
     transition: color 0.3s ease; 
 }
 
-
- 
-  
-.like-button:hover {
-    background-color: #387478;
+.delete-button {
+    background-color: transparent; 
+    border: none; 
+    font-size: 12px; 
+    font-family: "Nunito", sans-serif;
+    font-weight: 700; 
+    color: #970000; 
+    cursor: pointer;
+    transition: color 0.3s ease; 
 }

@@ -11,6 +11,7 @@ const StarButton = ({ rating, setRating }) => {
           width="44"
           height="42"
           viewBox="0 0 44 42"
+          data-testid={`star-${index + 1}`}
           fill={index < rating ? "#F9A826" : "#AFA9A9"}
           onClick={() => setRating(index + 1)} 
           style={{ cursor: "pointer", transition: "fill 0.3s" }}
@@ -25,3 +26,4 @@ const StarButton = ({ rating, setRating }) => {
 
 
 export default StarButton;
+

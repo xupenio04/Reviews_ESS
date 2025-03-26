@@ -17,6 +17,7 @@ export default function ReviewDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
+  const [commented, setCommented] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [userId, setUserId] = useState(null);
   const [isTextBoxVisible, setIsTextBoxVisible] = useState(false);
@@ -34,7 +35,8 @@ export default function ReviewDetail() {
   const handleConfirm = async () => {
     try {
       const token = JSON.parse(localStorage.getItem('userToken'));
-      if (text == '') {
+      const textValue = document.querySelector('[data-testid="comment-textarea"]').value; 
+      if (!textValue.trim()) {
         alert('Por favor, digite algo!');
         return;
       }
@@ -52,7 +54,11 @@ export default function ReviewDetail() {
       }
 
       alert('Comentário enviado com sucesso!');
-      setText('');
+      const data = await response.json();  
+      setComments((prevComments) => [...prevComments, data.comment]);
+      setIsTextBoxVisible(false);
+      setText(null);
+
     } catch (err) {
       setError(err.message);
       console.error('Erro ao enviar:', err);
@@ -122,7 +128,7 @@ export default function ReviewDetail() {
         <div className="overlay" onClick= {handleChange}>
           {/* Popup */}
           <div className="popup">
-            <textarea className="custom-textarea" placeholder="Digite aqui..." data-testid="comment-textarea"></textarea>
+            <textarea className="custom-textarea" placeholder="Digite aqui..." data-testid="comment-textarea" onChange={(event) => setText(event.target.value)}></textarea>
             <div data-testid="confirm"> 
               <Button label="Confirmar" onClick={handleConfirm} />
             </div>

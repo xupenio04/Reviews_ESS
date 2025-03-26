@@ -35,11 +35,11 @@ export default function Reviews({ reviewId}) {
         throw new Error('Erro ao excluir a review');
       }
       alert('Review excluída com sucesso!');
-      window.location.href = '/';
+      //window.location.href = '/';
       router.replace('/pages/initial_page');
     } catch (err) {
       console.error('Erro ao excluir:', err);
-      alert('Erro ao excluir a review' + err);
+      alert('Erro ao excluir a review');
     }
   };
   const handleUnlikeReview = async () => {
@@ -82,6 +82,7 @@ export default function Reviews({ reviewId}) {
       if (!response.ok) {
         throw new Error('Erro ao curtir a review!');
       }
+      await new Promise(resolve => setTimeout(resolve, 2000));
       setLikesCount(prev => prev + 1);
       setLiked(!liked);
     } catch (err) {
@@ -159,11 +160,14 @@ export default function Reviews({ reviewId}) {
                   <div className="vertical-right">
                     <StarRating rating ={post.classification}></StarRating> 
                     {userId == owner.name && (
-                      <button
-                        onClick={handleDeleteReview}
-                        className="button-style"
-                        title="Excluir review"
-                      > Excluir Review </button>
+                      <div> 
+                        <button
+                          onClick={handleDeleteReview}
+                          className="button-style"
+                          title="Excluir review"
+                          data-testid="excluir"
+                        > Excluir Review </button>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -172,10 +176,15 @@ export default function Reviews({ reviewId}) {
                 <p className="b">{post?.body || 'Conteúdo indisponível'}</p>
             </div>
             <div className="horizontal">
-              <HeartButton onClick={handleClick} liked={liked} setLiked={setLiked} />
-              <p className="text-xl font-bold">
+              <div> 
+              <HeartButton onClick={handleClick} liked={liked} setLiked={setLiked}/>
+              </div>
+              <p 
+                className="text-xl font-bold" 
+              >
                 {liked ? "Descurtir Review" : "Curtir Review"}
               </p>
+
               <b className="text-gray-600">
                 {likesCount === 1 ? "1 curtida" : `${likesCount} curtidas`}
               </b>

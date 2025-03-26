@@ -1,31 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Freeman&family=Quicksand:wght@300..700&family=Sevillana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Quicksand:wght@300..700&family=Sevillana&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Freeman&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&family=Sevillana&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: "Nunito", sans-serif;
     background-color: #F7E7DC; 
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
 .vertical {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; 
-    justify-content: flex-start;  
+    align-items: center;  
+    justify-content: center;
     background-color: #F7E7DC;
-    padding-top: 150px;
-    height: 70vh;
-    gap: 70px;
+    gap: 50px;
+    width: 100%;
 }
+
 .reviews-container {
     position: relative; 
+    width: 100%;
+    max-width: 500px;
 }
-  
+
 .invisible-button {
     position: absolute; 
     bottom: 0; 
@@ -35,12 +51,55 @@ body {
     background-color: transparent; 
     border: none;
     z-index: -1;
+    cursor: pointer;
 }
+
 .review-link {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #ffeee2;
-    border-radius: 8px; 
-    padding: 40px;
-    transition: border-color 0.3s ease; 
+    border-radius: 12px; 
+    padding: 30px;
+    transition: all 0.3s ease-in-out; 
     text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
 }
+
+.review-link:hover {
+    background-color: #ffddcc;
+    transform: translateY(-3px);
+}
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+  
+.error-message {
+    color: #d32f2f;
+    padding: 10px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+.end-message {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    font-style: italic;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+  

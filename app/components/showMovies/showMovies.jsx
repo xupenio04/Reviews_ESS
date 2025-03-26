@@ -1,13 +1,18 @@
 'use client';
 
 import './showMovies.css'
+import { useRouter } from 'next/navigation';
 import ImageCard from './imageCard/imageCard'
+
 
 import { useEffect, useState } from "react";
 
 export default function FilterReviews() {
+    const [accessedMovie, setAccessedMovie] = useState(null)
     const [movies, setMovies] = useState(null)
     const [movieTitleCover, setMovieTitleCover] = useState([])
+
+    const router = useRouter();
 
     useEffect(() => {
             async function getMovies (){
@@ -26,6 +31,7 @@ export default function FilterReviews() {
     
                 const orderedMovies = movies.sort((a, b) => a.name.localeCompare(b.name));
                 const listImageTitle = orderedMovies.map(movie => ({
+                    id: movie._id,
                     name: movie.name, 
                     coverURL: movie.cover.imageURL
                 }));
@@ -34,12 +40,16 @@ export default function FilterReviews() {
             getMovies()
         },[])
 
+        const handleNavigate = (id) => {
+            console.log(id)
+            router.push(`/pages/movie_reviews?id=${id}`);
+        }
     return (
         <div id = 'container'>
             <div id='grid-container'>
             {movieTitleCover && movieTitleCover.map((item, index) => (
-                <div key={index} id='grid-item'>
-                    <ImageCard imageURL={item.coverURL} title={item.name}/>
+                <div key={index} id='grid-item' onClick={()=>handleNavigate(item.id)}>
+                    <ImageCard imageURL={item.coverURL} title={item.name} />
                 </div>
             ))}
             </div>

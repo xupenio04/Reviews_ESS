@@ -1,4 +1,4 @@
-// File: /home/pvsc/Documentos/CIn/6 Período/ESS/ESS_projeto/Reviews_ESS/app/pages/initial_page/page.js
+// File: /Users/luanthiers/Desktop/Projetos/Projeto_ESS/reviews_/app/pages/initial_page/page.js
 import * as entry from '../../../../../app/pages/initial_page/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

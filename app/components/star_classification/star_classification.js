@@ -1,7 +1,6 @@
 import React from 'react';
 
 const StarRating = ({ rating }) => {
-  // Garante que a classificação não seja maior que 5
   const filledStars = Math.min(Math.max(rating, 0), 5);
 
   return (

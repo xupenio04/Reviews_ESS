@@ -71,11 +71,30 @@ body {
     background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
   }
   
-.no-reviews{
-    color:#e74c3c;
+  .no-reviews {
+    color: #e74c3c;
     font-size: 40px;
-    margin-left: 400px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px; /* Mesma altura do header */
+    background-color: #dfe6e9; /* Cor igual ao header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra superior */
+}
+
 .avatar {
     width: 130px; /* Largura do avatar */
     height: 130px; /* Altura do avatar */
@@ -123,6 +142,22 @@ body {
 }
 
 .follow-btn:hover {
+    background-color: #0a1717;
+}
+
+/* Botão de seguidores */
+.lists-button {
+    padding: 10px 30px;
+    background-color: #058f9c;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.lists-button:hover {
     background-color: #0a1717;
 }
 

@@ -137,7 +137,11 @@ b {
 .button-style {
     background: none;
     border: none;
+<<<<<<< HEAD
     color: #ff0000;
+=======
+    color: #970000;
+>>>>>>> upstream/dev
     cursor: pointer;
     padding: 0;
     font-size: inherit;
@@ -148,13 +152,24 @@ b {
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/pages/initial_page/style.css ***!
   \******************************************************************************************************************************************************************************************************************************************************************************/
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Freeman&family=Quicksand:wght@300..700&family=Sevillana&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Freeman&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&family=Sevillana&display=swap');
+=======
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Quicksand:wght@300..700&family=Sevillana&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+>>>>>>> upstream/dev
 
 body {
     font-family: "Nunito", sans-serif;
     background-color: #F7E7DC; 
+<<<<<<< HEAD
     margin: 0;
     padding: 0;
     display: flex;
@@ -176,6 +191,41 @@ body {
     position: relative; 
 }
   
+=======
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    justify-content: center;
+    background-color: #F7E7DC;
+    gap: 50px;
+    width: 100%;
+}
+
+.reviews-container {
+    position: relative; 
+    width: 100%;
+    max-width: 500px;
+}
+
+>>>>>>> upstream/dev
 .invisible-button {
     position: absolute; 
     bottom: 0; 
@@ -185,6 +235,7 @@ body {
     background-color: transparent; 
     border: none;
     z-index: -1;
+<<<<<<< HEAD
 }
 .review-link {
     display: block;
@@ -195,6 +246,90 @@ body {
     text-decoration: none;
 }
 
+=======
+    cursor: pointer;
+}
+
+.review-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffeee2;
+    border-radius: 12px; 
+    padding: 30px;
+    transition: all 0.3s ease-in-out; 
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+}
+
+.review-link:hover {
+    background-color: #ffddcc;
+    transform: translateY(-3px);
+}
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+  
+.error-message {
+    color: #d32f2f;
+    padding: 10px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+.end-message {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    font-style: italic;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+  
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/searchbar/searchbar.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+
+#searchbar {
+    width: 892px;
+    height: 40px;
+    position: relative;
+}
+
+#searchInput {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: #D9D9D9;
+    color: #302f2f;
+    padding-left: 40px;
+    padding-right: 120px;
+    font-size: 24px;
+    font-family: "Gasoek One", sans-serif;
+    border: 3px solid #243642;
+}
+
+#lupa {
+   position: absolute;
+   right: 50px;
+   bottom: 0.01px;
+   cursor: pointer;
+}
+>>>>>>> upstream/dev
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/button/Button.css ***!
   \******************************************************************************************************************************************************************************************************************************************************************************/
@@ -248,3 +383,147 @@ body {
     fill: darkred;
 }
 
+<<<<<<< HEAD
+=======
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/footer/Footer.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+.footer {
+    background-color: #243642;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    cursor: pointer;
+    background-color: transparent; /* Remove qualquer fundo */
+  }
+  
+  .logo-container svg {
+    height: 90px; 
+    width: auto;
+    background-color: transparent; /* Remove qualquer fundo */
+    margin-top: 10px;
+  }
+  
+  /* Remova completamente a seção .footer-content */
+  .footer-content {
+    display: none;
+  }
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./app/components/topbar_all/topbar.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+
+#topbar {
+    width: 100vw;
+    height: 120px; /* Altura reduzida */
+    background-color: #387478;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Melhor espaçamento entre os elementos */
+    padding: 0 20px 0 120px;
+    justify-content: flex-start;
+    gap: 40px;  
+}
+
+#search_options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile_infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#searchbar {
+    margin-top: 10px; /* Reduzido para caber melhor */
+}
+
+#filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre a mensagem e a div options */
+    font-family: "Gasoek One", sans-serif;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+#avatar{
+   align-self: flex-start;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+
+.profile{
+    align-self: center;
+    font-family: "Gasoek One", sans-serif;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+#options {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items: center; /* Mantém os itens centralizados */
+    background-color: #243642;
+    font-family: "Gasoek One", sans-serif;
+    color: #FFFFFF;
+    border-radius: 40px;
+    border: 2px solid white;
+    gap: 10px;
+    padding: 10px 15px; /* Ajuste fino para manter o espaçamento adequado */
+    height: 40px; /* Altura reduzida sem comprometer a legibilidade */
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+.filter-option {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+}
+
+.filter-option:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -5px; 
+    top: -5px; 
+    height: calc(100% + 10px); 
+    width: 2px;
+    background-color: white;
+}
+
+
+.filter-option:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+>>>>>>> upstream/dev

@@ -7,6 +7,7 @@ import PopUpAdicao from '../../components/popUp_adicao/popUp_adicao';
 import PopUpRemocao from '../../components/popUp_remocao/popUp_remocao';
 import { use, useEffect, useState } from 'react';
 import './style.css';
+import Footer from '../../components/footer/Footer';
 
 export default function Home() {
     const [IsAddButton, SetIsAddButton] = useState(false);
@@ -99,6 +100,7 @@ export default function Home() {
                 movies={filteredMovies}
                 listType={IsWatched ? 'watched' : 'abandoned'}
             />
+            <Footer/>
         </div>
     );
 }

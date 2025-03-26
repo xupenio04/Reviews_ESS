@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
     const [userName, setUserName] = useState('Carregando...');
     
+    
     const fetchUserData = async () => {
         try {
             const storedName = localStorage.getItem('userName');
@@ -32,6 +33,26 @@ import { useEffect, useState } from 'react';
         }
     };
 
+    const handleProfile = async () => {
+        const storedUserName = localStorage.getItem('userName');
+        const parsedUserName = JSON.parse(storedUserName);
+        console.log(parsedUserName.user.name)
+    
+        try {
+            const response = await fetch(`http://localhost:5001/users/find/${parsedUserName.user.name}`);
+            if (response.status === 200) {
+                setTimeout(() => {
+                    window.location.href = '/pages/page_userProfile';
+                }, 200);
+            } else {
+              setError("Usuário não encontrado");
+            }
+          } catch (err) {
+            console.error("Erro ao buscar usuário:", err);
+            setError("Erro ao conectar ao servidor.");
+          }
+    
+    };
     useEffect(() => {
         const IsAddButton = document.getElementById('addButton');
         IsAddButton.addEventListener('click', function(){
@@ -76,6 +97,7 @@ import { useEffect, useState } from 'react';
             </div>
 
             <div id='profile_infos'>
+                <button onClick={handleProfile} style={{ border: "none", background: "transparent", cursor: "pointer" }}>
                             <svg id ='avatar' width="130" height="80" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clipPath="url(#clip0_1355_1795)">
                                 <ellipse cx="63.6624" cy="74.6296" rx="56.7078" ry="56.9753" fill="#629584"/>
@@ -91,6 +113,7 @@ import { useEffect, useState } from 'react';
                                 </defs>
                                 </svg>
                                 <p id="profile">{userName}</p>
+                                </button>
                         </div>
 
         </div>

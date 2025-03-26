@@ -256,7 +256,7 @@ When('uma requisição POST com um JSON com título {string}, corpo {string}, cl
         response = error.response;
     }
 });
-When('uma requisição POST com um JSON com corpo {string} e classificação {int} para a rota {string}', async function (corpo, classificacao, rota) {
+When('uma requisição POST com um JSON com corpo {string}, classificação {int} e conteúdo {string} para a rota {string}', async function (corpo, classificacao, conteudo, rota) {
     try {
         response = await axios.post(rota, {
             body: corpo,

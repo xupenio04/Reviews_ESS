@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import './review_rectangle.css';
 
-export default function RetanguloCinza() {
+export default function RetanguloCinza({movieId}) {
   const [reviews, setReviews] = useState([]);
   const [usernames, setUsernames] = useState({});
   const [loading, setLoading] = useState(true);
@@ -11,10 +11,12 @@ export default function RetanguloCinza() {
   const [cover, setCover] = useState({}); // Objeto da capa
   const [movieDetails, setMovieDetails] = useState({ name: "", synopsis: "" }); // Para armazenar name e sinopse
 
-  const movieId = "67dad4119429a2af3f58ddc9"; // ID do filme
-
+  //const movieId = "67dad4119429a2af3f58ddc9"; // ID do filme
+  console.log(movieId)
   const fetchReviews = async (id) => {
     try {
+
+      //console.log(id)
       const response = await fetch(`http://localhost:5001/reviews/getMovie/${id}`);
       if (!response.ok) throw new Error('Falha ao buscar reviews');
       
@@ -52,8 +54,10 @@ export default function RetanguloCinza() {
   };
 
   useEffect(() => {
-    fetchReviews(movieId);
-  }, []);
+    if (movieId) {
+      fetchReviews(movieId);
+    }
+  }, [movieId]); // escutamos mudanças no movieId
 
 if (loading) return <div>Carregando...</div>;
 if (error) return <div>Erro: {error}</div>;
